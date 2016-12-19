@@ -1,0 +1,445 @@
+(These sentences were translated with the translation software.)
+-------------------------------------------------------------------------------
+ Simple manual
+-------------------------------------------------------------------------------
+
+---------------------------------------
+ Explanation of menu
+---------------------------------------
+( file )
+- New
+	The map file is newly made. 
+	Upper bounds of the map that can be made up to are 10000 in length, 
+	and 10000 parts in side. 
+
+- Open
+	An existing file is opened. 
+
+- Reload
+	It reads again annulling the change of the file that is opening now. 
+
+- Save
+	The file editing it now new/is preserved in the superscription. 
+
+- Save As
+	The file editing it putting the alias is preserved. 
+
+- Impoet
+	Data is read from the file by the plug-in for reading. 
+	Please read bundled "plugin.txt" about a detailed explanation. 
+
+- Export
+	Data is written file by using the plug-in for writing. 
+	Please read bundled "plugin.txt" about a detailed explanation. 
+
+- Exit
+	The editor is ended. 
+
+( edit )
+- Undo
+	The map editing immediately before is canceled. 
+	Undo and possible Redo operations:
+	It is a pen, a Thai ring pen, a cutout, and puts, paints out, and is 
+	a replacement. 
+
+- Redo
+	It returns it to the state before it cancels. The limitation is the same up. 
+
+- Cut
+	It paints out with transparent parts if transparent parts are set after data within 
+	the range of the selection is copied, and it is painted out with parts that have been 
+	selected now if not set. 
+	A similar operation is possible also by the Delete key. 
+
+- Copy
+	Data within the range of the selection is copied. 
+
+- Paste
+	The copied data is put within the present range of the selection. 
+	(It is put on Platinum in another process that multiple started. )
+
+- Select All
+	The entire map is made the range of the selection. 
+
+- Clear Selection
+	A present range of the selection is released. 
+	When the range of the selection is released with the range of the selection movement/
+	reproduced, movement/reproduction is fixed. 
+
+- Replace
+	Parts of the replacement object are replaced with another parts. 
+	Processing adjusts to all data of a current layer. 
+
+- Fill
+	It paints out with selection parts/definition pattern or transparent parts within 
+	the range of the selection. 
+	When the Ctrl+Delete key is pushed, the dialog is painted out with selection parts/
+	definition pattern without going out. 
+
+- Flash of cancellation buffer
+	The history buffer swells up gradually when work is proceeded because it can do Undo Redo as long 
+	as the memory permits. 
+	Please the thing with a good head of preservation in the file etc. must not go and do the flash 
+	and open the memory to an old history if the memory is pressed. I think that it need not worry 
+	about it too much. 
+
+- Project Option
+	<< general tab >>
+		General setting of project file. 
+		- Only the file name
+		  Only the file name of the part image is preserved in the project file. 
+		  The same to project file directory should entered the part image. 
+		- Relative path from project file
+		  It preserves it in the project file by the relative path that sees passing the 
+		  part image from the project file. 
+		- Transparent parts are made effective. 
+		  When the check is put, transparent parts are made effective. 
+		  When the part number is input, the corresponding part number is considered 
+		  transparent parts and not displayed. 
+
+	<< grid tab >>
+		Set grid color. 
+
+	<< comment tab >>
+		The comment can be written in the project. 
+
+( Tool )
+- Pen tool
+	Parts or the definition patterns that have been selected now are arranged in 
+	the map. 
+
+- TPen tool
+	To install within the range when the button is separated after the range 
+	is specified with the mouse drug, parts/pattern is spread. 
+	When a vertical line and box/frame is made, it is convenient. 
+
+- Fill tool
+	All parts that are thoroughly to parts at the clicked position adjacent 
+	are painted out with the selection parts of the part window. 
+	When two or more parts/pattern has been selected, parts on the left are 
+	always used. 
+
+- Select tool
+	A rectangular range of the selection can be specified. 
+	The made range of the selection can be cut out, be copied, and be put. 
+	Data within the range of the selection can be moved by the range of the selection 
+	dropping in drug &. 
+	Data within the range of the selection can be reproduced by the range of the selection 
+	dropping in drug & while pushing the Ctrl key. 
+	If the Shift key is used together at the same time, all visible layers become objects. 
+	When the range of the selection is switched to the release/other tool, movement/
+	reproduction is fixed. 
+
+- Pattern tool
+	Parts at the clicked position on the editor side are selected as current parts. 
+	The pattern can be defined by the drag & drop operation. 
+	It comes to be able to put the defined pattern in pen/Thai ring pen/painting out. 
+	When parts are newly selected in the part window, the pattern definition is 
+	automatically released. 
+	The mouse right button operation temporarily changes into the pattern definition tool. 
+
+- Hand tool
+	When the screen is dragged with the mouse, the screen can be scrolled. 
+	When the hand tool is temporarily used when other tools are used,
+	it keeps pushing the space key. 
+
+- Resize
+	The size of the map is changed. 
+	It is necessary not to be able to cancel, please. 
+
+- Scroll
+	The map data of a current layer(or all layers) is moved.
+
+
+( Layer )
+- Add Layer
+	An empty layer is made. 
+	The size of the layer (width and height) is fixation by the whole project. 
+	When transparent parts are effective, the entire layer is painted out with 
+	transparent parts. 
+
+- Duplicate Layer
+	The layer that has been selected now is reproduced. 
+	The part image related to the layer in the reproduction origin is related 
+	together. 
+
+- Erase Layer
+	The layer that has been selected now is deleted. 
+	- It is not possible to cancel. 
+
+- Select Upper Layer. 
+	One of the current layers layer above is selected. 
+
+- Select Lower Layer. 
+	One of the current layers layer below is selected. 
+
+- Layer Option
+	The dialog to which the setting of the layer is changed is put out. 
+	It is possible to change in the change in the name and the part image used. 
+	- The reading button of the part window is used to read the part image newly. 
+
+( View )
+- Zoom In
+	The display size of the editor window is expanded at intervals of 25%. 
+
+- Zoom Out
+	The display size of the editor window is reduced at intervals of 25%. 
+
+- Reset Zoom
+	The display size is reset. 
+
+- Zoom In(parts)
+	The display size of the parts window is expanded at intervals of 25%. 
+
+- Zoom Out(parts)
+	The display size of the parts window is reduced at intervals of 25%. 
+
+- Reset Zoom(parts)
+	The display size of the parts windpow is reset. 
+
+- Show Grid
+	The grid of the sizes of parts is displayed. 
+
+- Show Cursor Grid
+	The grid is displayed at the cursor position by the size of parts/pattern that has 
+	been selected. 
+
+- Show Marker
+	A triangular sign (marker) is displayed in visible parts of a current layer 
+	putting it. 
+	Another layer not intended by mistake if this is displayed can be prevented being 
+	edited. 
+	Please note that the marker takes side with all parts as for this function if 
+	transparent parts are not made effective. 
+
+- Fog Mode
+	Layers other than a current layer are displayed by translucent. 
+	The current layer marker and the outline function regardless of the setting of 
+	transparent parts though it is the same. 
+
+- Show Number
+	A data number is displayed on the part of a current layer.
+
+- Enable Transparentry
+	The penetration processing by the penetration color is done. 
+	It is not drawn to the color when the penetration color is contained in parts, 
+	the layer below is transparent, and it sees it. 
+
+- Select Trans Color
+	The penetrated color is selected. 
+	This penetration color adjusts to all layers. 
+	In general, the color used well as a penetration color is registered in the 
+	color selection dialog. 
+	It is possible to set it even if it Ctrl + clicks in the vicinity of the 
+	color where it wants to penetrate the part window. 
+
+( Window )
+- Parts window
+	Display/non-display of the part window is switched. 
+
+- Layer window
+	Display/non-display of the layer window is switched. 
+
+- Preview window
+	Display/non-display of the over view window is switched. 
+
+
+( help )
+- Version Info
+	Information of the application. 
+
+
+---------------------------------------
+ Futures
+---------------------------------------
+- Pattern definition
+A part of the map data is defined as a pattern and the edit and painting out with 
+the pen are possible. 
+
+- Unrestricted Undo and Redo
+"Cancellation" and "Re-doing" can be done to the operation to make a change 
+to the map data. 
+Undo and possible Redo operations:
+It puts, it paints out, it replaces, and it movement/reproduces the pen, 
+the Thai ring pen, and the cutout. 
+
+- Paste of map data by specification of range of selection
+It cuts out, and the map data can be pasted by copying and putting. 
+
+- Data in the selection area movement/is reproduced (Visible all layer is an 
+object ..pushing the Shift key.. ..putting out..). 
+
+- Layer
+The map with an upper and lower position is made, and for the event ..one of the layers... 
+
+It uses as a flag map, and the usage like the use of the layer that stores hit judgment 
+information etc. is various. 
+When thinking that power of expression is insufficient, one part image is good at two 
+or more layers to make one map composed repeatedly because it can have the part image 
+of each layer. 
+It is possible to make it by 255 layers or less. 
+
+- Reduced display and movement on screen of map with over view window
+
+- Penetration processing
+Cararkeing of each pixel. 
+The set penetration color is not displayed, the layer below 
+penetrates, and it sees it. 
+
+- Writing format
+Writing with the CSV file and the bit map file besides the FMF file of a simple data structure 
+is possible. 
+The source code of C++ and Delphi is appended as a reading sample. 
+
+- I/O plug-in
+The plug-in for read/writing is supported. 
+An original file format can be freely added back. 
+
+- Transparent parts
+They are parts paved in the part where parts do not exist. 
+It is possible to make it to can the specification of one arbitrary 
+part number, and cannot the use of transparent parts. 
+It changes from the project setting in the setting. 
+
+
+---------------------------------------
+ Quick start
+---------------------------------------
+1."New" of the file menu is selected and a new map of an arbitrary size is 
+made. 
+2.The reading button of the part window is pushed or the part image drops in drug & in the part 
+window, and the part image that wants to treat with the layer is read. 
+3.When two or more layers are treated, transparent parts are made effective by setting the 
+project and transparent parts are specified. 
+4.After parts are selected in the part window, the map is constructed with an arbitrary tool. 
+The part image is not allocated in the layer at the stage where a new layer was added, and 
+read the part image, please by the above-mentioned method. 
+When some part images have already been read, the part image can be specified from the layer 
+setting. 
+When the part image is shut, the reference is released from all layers that refer to the part 
+image. 
+5.When the map is completed, the map data is written by an arbitrary format. 
+
+
+---------------------------------------
+ Tips
+---------------------------------------
+- About the general operation
+1.After the image is read, it relates it to a current layer when the 
+part image is done to the part window in Drag&Drop. 
+2.When the project file is done to the editor window in Drag&Drop, the project is opened. 
+3.When the part image is edited on the outside, the rereading seeing is 
+automatically done. 
+4.The pattern that can be made with parts and the pattern definition tools that can 
+be selected in the part window is in an exclusive relation, is released the pattern 
+when parts are selected, and when the pattern is selected, the selection of parts is 
+released. 
+As for the pen, the Thai ring pen, and painting out, etc. either of these parts/
+pattern is used. 
+5.When parts are double-clicked in the part window, the parts are set to transparent 
+parts. 
+6.The range of the selection can be reproduced and data within the range of the selection 
+of a current layer be reproduced by being able to move data within the range of the 
+selection of a current layer by doing Drag&Drop with the mouse, and doing Drag&Drop while 
+pushing the Ctrl key. 
+7.A visible all layer becomes an object when movement/reproducing while 
+pushing the Shift key though movement/reproduction of the above-mentioned 
+selection range data adjusts only to a current layer. 
+8.The pop-up menu to which it can reproduction/synthesize it comes out when right-
+clicking in the layer window. 
+
+- About the mause operation
+1.A left button is allocated in the pen, the Thai ring pen, and the tool such as 
+making the range of the selection. 
+2.A right button temporarily changes into the pattern definition tool only 
+while being pushing the button. 
+3.The screen can be scrolled with the wheel up and down. When the wheel is turned 
+while pushing the Ctrl key, it scrolls right and left. 
+5.The color at the clicked cursor position is set as a penetration color of the penetration processing when clicking while pushing the Ctrl key in the part window. 
+
+- About the key operation
+1.Keyboard short-cut is allocated in the menu operation often used. 
+2.F key is allocated in various tools (A part of tool is allocated in A, Z, X, C, and V). 
+3.The screen can be scrolled with the arrow key. 
+4.The screen can be freely scrolled with the mouse while the space key is being 
+pushed. 
+5.Whenever the Esc key is pushed, a temporary display & non-display of parts/layer/over view 
+window can be done. 
+6.When the Delete key is pushed, it paints out with 'Transparent parts' within 
+the range of the selection. 
+When the Ctrl+delete key is pushed, it paints out with 'Selection pattern/
+definition pattern' within the range of the selection. 
+7.It uses, when choosing a part from the part chosen by
+d, f, g, and the r key now relatively.
+
+- Application setting of addition
+The setting of the addition becomes effective by adding the key following the
+application setting of the addition to the General section of Platinum.ini. 
+
+  zoomratio=n (n=16..128)	Zoom coefficient.(Change appears greatly,
+				so that a numerical value is large.)
+  numbercolortype=n (n=0..5)	The color of the number used by 'Show number'
+				(0=black, 1=white, 2=gray, 3=anyting,
+				4=GridColor, 5=CursorGridColor)
+  numbercolor=n (n=0..16777215)	Parts number color(numbercolortype=3)
+  boxnumber=n (n=0|1)		It draws to the box in the character of the part number. 
+  numberbkcolor=n (n=0..16777215) Box color.(boxnumber=1)
+  gridmin=n (n=1..)		Lower bound limit of grid display.
+  numbermin=n (n=1..)		Lower bound limit of part number display.
+  forceinvnum=n (n=0|1)		There is a check in 'Display of the part number'
+				when one is specified. 
+				Only visible parts other than transparent parts are displayed. 
+  syncmaingrid=n (n=0|1)	If 1 is specified, the grid display state of a part window is
+				synchronized with the grid display state of a main window.
+  autoactive=n (n=0|1)		If cursor goes into a main window, a focus
+				will move to a main window automatically.
+  usetranslucentselect=n (n=0|1) Specification of 1 carries out translucence processing
+				 of the display of the selection range.
+  pwinalpha=n (n=0..255)	The transparency of a parts window is specified (opaque at 255).
+  lwinalpha=n (n=0..255)	The transparency of a layer window is specified (opaque at 255).
+  owinalpha=n (n=0..255)	The transparency of a preview window is specified (opaque at 255).
+Å@				(pwinalpha, lwinalpha, and owinalpha become effective by 
+				the system more than Windows2000.)
+
+
+---------------------------------------
+ Explanation of FMF file
+---------------------------------------
+The header, and the FMF file is a binary file that consists of one or more layer 
+data, and simple file structure. 
+Header area (20Byte) is recorded at the head and the layerCount number of FMF 
+headers is output to the layer data block afterwards. 
+
+The size of layer N area of one layer area of 0 layer areas of the 
+header area header area fixes 20 bytes. 
+The size of each layer area is mapWidth*mapHeight*(bitCount/8) byte. 
+
+- About the mark of the data size
+[U1]	unsigned char (1byte)
+[U4]	unsigned integer (4byte)
+Byte order is Little endian recorded from the low rank byte. 
+
+<< FMF file header (20 byte) >>
+
++0 	identifier [U4]		// file identifier(0x5F464D46)
++4	Data size [U4]
++8 	Width of map [U4]
++12	Height of map [U4]
++16	Width of parts [U1]
++17	Height of parts [U1]
++18	Number of layer [U1]
++19	Bit count of data [U1] // (8 or 16)
+
+<< Layer data >>
+The values of the map parts queue up in mapWidth*mapHeight piece and Beta. 
+
+When one part eight bit (1byte) bitCount is 16 when bitCount is eight, 
+one part are 16 bits. (2byte)
+
+The data size of one layer is as follows. 
+layerSize = mapWidth * mapHeight * (bitCount / 8);
+Moreover,
+fileSize = headerSize(20bytes) + layerSize * layerCount;
+It becomes it. 
+
+*Please refer to an attached source code for details. 

@@ -1,0 +1,149 @@
+(These sentences were translated with the translation software.)
+-------------------------------------------------------------------------------
+About the plug-in
+-------------------------------------------------------------------------------
+
+- About the plug-in use
+
+The plug-in used for the Plugins folder when Platinum reads and writes the 
+file is stored. 
+These plug-ins are listed in the place "File type" of the file selection 
+dialog called from "Read" and "Write", etc.
+The order of the row of this list is the order of the file name of the plug-
+in. 
+Please change the name of the plug-in appropriately when you want to change 
+the arrangement. 
+
+(ex:
+0_fmf.dll
+1_csv.dll
+
+(Import)	Reading is possible. It calls it from "Import" of menu. 
+(Export)	Writing is possible. It calls it from "Export" of menu. 
+(Fileformat)	Reading/writing is possible. It calls it from
+		"Open" and "Save/Save As" of menu. 
+
+
+ bmp.dll (Export)
+	The entire map is output as a bit-mapped image. 
+	It is not drawn to the layer that is non-display. 
+	Presence in the grid and the color in the grid
+	It succeeds to from the project file that is opening now. 
+
+ csv.dll (Import/Export)
+	Writing and reading the CSV text file can be done. 
+	Please there must be two kinds of file formats and choose favorite 
+	one and use it. 
+
+	<<type1>>
+	One line is treated as one record with the text file to which the value 
+	and the value are delimited by comma (,). 
+	The width of the map is made one record and the record is stored only as 
+	for the number of height of the map. 
+	Changing line is inserted as a delimitation of the layer block and the 
+	layer block. 
+	Though it has generality because it is composed only of the map data
+	It is necessary to specify information of the size etc. of the map chip 
+	appropriately at the time of reading. 
+
+	<<type2>>
+	Though a basic data row is the same as type1
+	When reading with Platinum, it is ..input of map information.. omissible because 
+	information in the map is added ahead of the map data one line. 
+	Information in the map is as follows. 
+	mapWidth, mapHeight, partsWidth, partsHeight, layerCount, bitCount(changing line)
+
+	¥Export
+	Please select either type1 or type2 from among the option. 
+
+	¥Import
+	>> When the selected file is type1
+	  Type1 is selected from File Type. 
+	  Please specify the data sizes of one part for Parts Width and Parts 
+	  Height of Settings by the sizes of parts and items of Size. 
+
+	>> When the selected file is type2
+	  A set each item is not cared about though is set automatically even 
+	  if it changes. 
+
+ fmf.dll (Import/Export)
+	Reading is easy and is high-speed in the binary file that consists of the layer 
+	data with the header. 
+	There is a sample source code to read *.fmf Samples/src/file. 
+
+ ppj.dll (Fileformat)
+	It is a file of the project of the default that Platinum uses format. 
+	All almost information that Platinum maintains is written file. 
+
+
+
+- About the plug-in development
+
+It comes to be able to read and write an arbitrary file with Platinum by 
+making the plug-in and putting the plug-in on the Plugins folder. 
+If it is possible to input and output by the best file format for the 
+developed game, it is convenient. 
+The plug-in making procedure is easily described here. 
+Moreover, there is a source code of fmf.dll in the following folders, and 
+refer to it also, please. 
+Samples\src\fm_plugin\
+
+(making method in VisualC++7.1)
+
+(1). file (F) -> new making (N) -> project (P) . . . The VisualC++ project is 
+selected from the dialog to which is displayed, and the Win32 project is selected. 
+
+(2). Because the wizard is displayed, the kind of the application on 
+the page of "Setting of the application": DLL is selected and 
+completion is pushed. 
+
+(3). Include does Sample/src/plugin.h in stdafx.h or an arbitrary place. 
+#incllude "plugin.h"
+
+(4). The following four functions are appropriately mounted and the function is 
+exported. 
+
+extern "C" __declspec(dllexport) void GetPlatinumPluginInfo(PlatinumPluginInfo* pPluginInfo);
+extern "C" __declspec(dllexport) int IsSupported(LPCTSTR lpszFileName);
+extern "C" __declspec(dllexport) int Export(HWND hWndParent, LPCTSTR lpszFileName, const PlatinumData* pData, PPI_PROGRESS_CALLBACK fnCallback);
+extern "C" __declspec(dllexport) int Import(HWND hWndParent, LPCTSTR lpszFileName, PlatinumData* pData, PPI_PROGRESS_CALLBACK fnCallback);
+
+(5). The instance steering wheel is maintained with DllMain, and please pass hWndParent 
+as a parent window by Import or the Export function and display the dialog when you want 
+to display the dialog with DLL. 
+
+(ex:
+HINSTANCE g_hInst;
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
+{
+	if (fdwReason == DLL_PROCESS_ATTACH)
+		g_hInst = hinstDLL;
+
+	return TRUE;
+}
+BOOL CALLBACK DialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch(uMsg)
+	{
+	case WM_INITDIALOG:
+		return TRUE;
+	case WM_COMMAND:
+		switch(LOWORD(wParam))
+		{
+		case IDOK:
+			EndDialog(hWnd, IDOK);
+			return TRUE;
+		case IDCANCEL:
+			EndDialog(hWnd, IDCANCEL);
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+extern "C" __declspec(dllexport) int Export(HWND hWndParent, LPCTSTR lpszFileName, const PlatinumData* pData, PPI_PROGRESS_CALLBACK fnCallback)
+{
+	int nResult = DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWndParent, DialogProc, 0);
+}
+
+(6). Please store the made plug-in in the Plugins folder of Platinum. 

@@ -1,0 +1,41 @@
+crt0.rel            :   crt0.s
+main.rel            :   main.s \
+                        bios.inc System.inc
+System.rel          :   System.s System.inc \
+                        bios.inc vdp.inc
+App.rel             :   App.s App.inc \
+                        bios.inc vdp.inc System.inc Title.inc Game.inc
+Title.rel           :   Title.s Title.inc \
+                        bios.inc vdp.inc System.inc App.inc
+Game.rel            :   Game.s Game.inc \
+                        bios.inc vdp.inc System.inc App.inc Ground.inc Ship.inc Shot.inc Enemy.inc Bullet.inc
+Ground.rel          :   Ground.s Ground.inc \
+                        bios.inc vdp.inc System.inc App.inc Game.inc
+Star.rel            :   Star.s Star.inc \
+                        bios.inc vdp.inc System.inc App.inc Game.inc
+Ship.rel            :   Ship.s Ship.inc \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Shot.inc
+Shot.rel            :   Shot.s Shot.inc \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Ship.inc
+Bullet.rel          :   Bullet.s Bullet.inc \
+                        bios.inc vdp.inc System.inc App.inc Game.inc
+Enemy.rel           :   Enemy.s Enemy.inc \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Ship.inc Bullet.inc
+EnemyBomb.rel       :   EnemyBomb.s \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Enemy.inc Bullet.inc
+EnemyFans.rel       :   EnemyFans.s \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Ship.inc Enemy.inc Bullet.inc
+EnemyRugal.rel      :   EnemyRugal.s \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Ship.inc Enemy.inc Bullet.inc
+EnemyGarun.rel      :   EnemyGarun.s \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Ship.inc Enemy.inc Bullet.inc
+EnemyDee01.rel      :   EnemyDee01.s \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Ground.inc Ship.inc Enemy.inc Bullet.inc
+EnemyDucker.rel     :   EnemyDucker.s \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Ground.inc Ship.inc Enemy.inc Bullet.inc
+EnemyBigCore.rel    :   EnemyBigCore.s \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Ship.inc Enemy.inc
+EnemyBeam.rel       :   EnemyBeam.s \
+                        bios.inc vdp.inc System.inc App.inc Game.inc Enemy.inc
+
+pattern.rel         :   pattern.s

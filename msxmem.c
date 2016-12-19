@@ -36,10 +36,10 @@ void msxmem(void)
 	unsigned char a, b;
 	a = 3;
 	b = 1;
-	msxstr[0] = "1";
-	msxstr[1] = "2";
+	msxstr[0] = "1 ";
+	msxstr[1] = "2 ";
 	msxstr[2] = "2+";
-	msxstr[3] = " TurboR";
+	msxstr[3] = "TB";
 	for(b=2;b>0;b--)
 	{
 		if (b==1)
@@ -60,11 +60,19 @@ void msxmem(void)
 	}
 		
 	setInverse();
-	slotput(0,0,0,"BA", 1); // slot, subslot, page
+	slotput(0,0,0,"B ", 1); // slot, subslot, page
 	gotoxy(1,21);
 	puts("MSX");
 	a = MSXVER;
 	puts(msxstr[a]);
+	b = EXPTBL;
+	b &= 0xc>>2;
+	slotput(0,b,1,msxstr[a], 1);
+	if (MSXVER>0)
+	{
+		b = EXBRSA;
+		
+	}
     //gotoxy (0,20);
 	//puts ( "32k ROM init ok\r\n");
 	//puts ( "start main ::\r\n");
@@ -242,5 +250,6 @@ void setInverse(void)
 void asm_ext(void)
 {	__asm
 	#include "msxdef.s"
+	#incbin "msxdef.s"
 	__endasm;
 }

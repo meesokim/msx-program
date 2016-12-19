@@ -1,0 +1,12 @@
+crt0.rel            :   crt0.s
+main.rel            :   main.s \
+                        bios.inc System.inc
+System.rel          :   System.s System.inc \
+                        bios.inc vdp.inc
+Math.rel            :   Math.s Math.inc
+App.rel             :   App.s App.inc \
+                        bios.inc vdp.inc System.inc Game.inc
+Game.rel            :   Game.s Game.inc \
+                        bios.inc vdp.inc System.inc App.inc
+
+pattern.rel         :   pattern.s

@@ -1,0 +1,78 @@
+# depslib dependency file v1.0
+1438796662 source:c:\users\public\documents\hex2bin-2.0\common.c
+	"common.h"
+
+1424584750 
+
+1438795997 c:\users\public\documents\hex2bin-2.0\common.h
+	<stdint.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"binary.h"
+	"libcrc.h"
+
+1424640669 c:\users\public\documents\hex2bin-2.0\binary.h
+
+1424582195 c:\users\public\documents\hex2bin-2.0\libcrc.h
+
+1424646503 source:c:\users\public\documents\hex2bin-2.0\libcrc.c
+	<stdint.h>
+
+1438796693 source:c:\users\public\documents\hex2bin-2.0\mot2bin.c
+	"common.h"
+
+1424584750 source:c:\users\public\documents\hex2bin-2.0\binary.c
+	<stdint.h>
+	"binary.h"
+
+1424581150 source:/home/public/projects/soft/tools/Hex2bin-2.1/binary.c
+	<stdint.h>
+	"binary.h"
+
+1424637069 /home/public/projects/soft/tools/Hex2bin-2.1/binary.h
+
+1438796662 source:/home/public/projects/soft/tools/Hex2bin-2.1/common.c
+	"common.h"
+
+1438795997 /home/public/projects/soft/tools/Hex2bin-2.1/common.h
+	<stdint.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"binary.h"
+	"libcrc.h"
+
+1424578595 /home/public/projects/soft/tools/Hex2bin-2.1/libcrc.h
+
+1424642903 source:/home/public/projects/soft/tools/Hex2bin-2.1/libcrc.c
+	<stdint.h>
+
+1448739993 source:p:\documents\projects\soft\tools\hex2bin-2.3\binary.c
+	<stdint.h>
+	"binary.h"
+
+1424640669 p:\documents\projects\soft\tools\hex2bin-2.3\binary.h
+
+1475283041 source:p:\documents\projects\soft\tools\hex2bin-2.3\common.c
+	"common.h"
+
+1474869111 p:\documents\projects\soft\tools\hex2bin-2.3\common.h
+	<stdint.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"binary.h"
+	"libcrc.h"
+
+1424582195 p:\documents\projects\soft\tools\hex2bin-2.3\libcrc.h
+
+1424646503 source:p:\documents\projects\soft\tools\hex2bin-2.3\libcrc.c
+	<stdint.h>
+
+1474868641 source:p:\documents\projects\soft\tools\hex2bin-2.3\mot2bin.c
+	"common.h"
+

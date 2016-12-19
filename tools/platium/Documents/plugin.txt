@@ -1,0 +1,139 @@
+
+-------------------------------------------------------------------------------
+ プラグインについて
+-------------------------------------------------------------------------------
+
+■プラグイン利用について
+
+PluginsフォルダにPlatinumがファイルを読み書きする際に使用する
+プラグインが格納されています。
+これらのプラグインはPlatinumのメニューの「読み込み」「書き出し」などのから呼び出される
+ファイル選択ダイアログの「ファイルの種類」という場所にリストアップされます。
+このリストの並び順はプラグインのファイル名の順番です。
+並びを変更したい場合はプラグインの名称を適切に変更してください。
+(ex:
+0_fmf.dll
+1_csv.dll
+
+
+(Import)	読み込が可能。「読み込み」から呼び出します。
+(Export)	書き出しが可能。「書き出し」から呼び出します。
+(Fileformat)	読み込み/書き出しが可能。「開く」「保存/別名で保存」から呼び出します。
+
+
+ bmp.dll (Export)
+	マップ全体をビットマップ画像として出力します。
+	非表示になっているレイヤーは描画されません。
+	グリッドの有無やグリッドの色は、
+	現在開いているプロジェクトファイル(*.ppj)から継承します。
+
+ csv.dll (Import/Export)
+	CSVテキストファイルの書き出しと読み込みが行えます。
+	ファイル形式が2種類あるので好きな方を選んで使用してください。
+
+	<<type1>>
+	値と値をカンマ(,)で区切ったテキストファイルで、
+	１行を１レコードとして扱います。
+	マップの幅を１レコードとしてマップの高さの数だけレコードが
+	格納されています。
+	レイヤーブロックとレイヤーブロックの区切りとして改行が挿入されてます。
+	マップデータのみで構成されているので汎用性がありますが、
+	読み込み時にはマップチップのサイズなどの付加情報を適切に指定する必要があります。
+
+	<<type2>>
+	基本的なデータ並びはtype1と同じですが、
+	マップデータの前にマップの情報が1行付加されるので、
+	Platinumで読み込む際にマップ情報の入力を省略できます。
+	1行目に出力されるマップの情報は以下のとおりです。
+	マップの幅,マップの高さ,マップチップの幅,マップチップの高さ,レイヤー数,ビットカウント(改行)
+
+	・書き出し
+	　オプションの中からtype1, type2のどちらかを選択して下さい。
+
+	・読み込み
+	　>>選択したファイルがtype1の場合は、
+	　　File Typeからtype1を選択し、
+	　　SettingsのParts Width, Parts Heightにパーツのサイズ、
+	　　Sizeの項目で1パーツのデータサイズを指定してください。
+
+	　>>選択したファイルがtype2の場合は、
+	　　各設定項目は自動設定されますが変更しても構いません。
+
+ fmf.dll (Import/Export)
+	ヘッダブロックとレイヤーデータブロックから成るバイナリファイルで、
+	読み込みが簡単で高速です。
+	Samples/src/ 内に*.fmfファイルを読み込むためのサンプルソースコードが入っています。
+
+ ppj.dll (Fileformat)
+	Platinumが使用するデフォルトのプロジェクトファイルフォーマットです。
+	Platinumが保持するほぼ全ての情報がファイルに書き出されます。
+
+
+■プラグイン開発について
+
+プラグインを作成してPluginsフォルダにプラグインを置くことで
+Platinumで任意のマップファイルを読み書きする事が出来るようになります。
+開発しているゲームに最適なファイルフォーマットで入出力できれば便利です。
+ここではプラグイン作成手順を簡単に記載します。
+また、以下のフォルダにfmf.dllのソースコードがありますので、
+それも併せて参考にして下さい。
+(Samples\src\fmf_plugin\)
+
+・VisualC++ 7.1での作成方法
+(1). ファイル(F) -> 新規作成(N) -> プロジェクト(P)... で表示されるダイアログから
+VisualC++プロジェクトを選択し、Win32プロジェクトを選択します。
+
+(2). ウィザードが表示されるので「アプリケーションの設定」のページで、
+ アプリケーションの種類 : DLL
+を選択して完了を押します。
+
+(3). stdafx.h又は任意の場所で Sample/src/plugin.h をインクルードします。
+   #incllude "plugin.h"
+
+(4). 以下に示す4つの関数を適切に実装し関数をエクスポートします。
+　(VisualC++ 7より古いバージョンの場合は.defファイルを記述してプロジェクトに追加してください。)
+
+extern "C" __declspec(dllexport) void GetPlatinumPluginInfo(PlatinumPluginInfo* pPluginInfo);
+extern "C" __declspec(dllexport) int IsSupported(LPCTSTR lpszFileName);
+extern "C" __declspec(dllexport) int Export(HWND hWndParent, LPCTSTR lpszFileName, const PlatinumData* pData, PPI_PROGRESS_CALLBACK fnCallback);
+extern "C" __declspec(dllexport) int Import(HWND hWndParent, LPCTSTR lpszFileName, PlatinumData* pData, PPI_PROGRESS_CALLBACK fnCallback);
+
+(5). DLL側でダイアログを表示したい場合はDllMainでインスタンスハンドルを保持しておき、
+Import、又はExport関数で親ウィンドウとしてhWndParentを渡してダイアログを表示してください。
+
+(ex:
+HINSTANCE g_hInst;
+BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
+{
+	if (fdwReason == DLL_PROCESS_ATTACH)
+		g_hInst = hinstDLL;
+
+	return TRUE;
+}
+BOOL CALLBACK DialogProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch(uMsg)
+	{
+	case WM_INITDIALOG:
+		return TRUE;
+	case WM_COMMAND:
+		switch(LOWORD(wParam))
+		{
+		case IDOK:
+			EndDialog(hWnd, IDOK);
+			return TRUE;
+		case IDCANCEL:
+			EndDialog(hWnd, IDCANCEL);
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+extern "C" __declspec(dllexport) int Export(HWND hWndParent, LPCTSTR lpszFileName, const PlatinumData* pData, PPI_PROGRESS_CALLBACK fnCallback)
+{
+	int nResult = DialogBoxParam(g_hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWndParent, DialogProc, 0);
+	...
+}
+
+(6). 作成したプラグインをPlatinumのPluginsフォルダに格納してください。
