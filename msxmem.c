@@ -5,11 +5,18 @@
 
 void bios_chput(char a);
 void puts(char *s);
+void putsi(char *s);
 char chkprislot(void);
 void pageaddr(int addr, char num);
 void msxmem(void);
 void init_32krom (void);
-void slotput(char, char, char, char *);
+void slotput(char, char, char, char *, char);
+void gotoxy(char, char);
+void setInverse(void);
+
+//volatile unsigned char * __at (0xFCC1) EXPTBL;
+
+static char *msxstr[4];
 
 void main(void)
 {
@@ -26,9 +33,13 @@ void msxmem(void)
 {
 	unsigned int i;
 	unsigned int j;
-	char a, b;
+	unsigned char a, b;
 	a = 3;
 	b = 1;
+	msxstr[0] = "1";
+	msxstr[1] = "2";
+	msxstr[2] = "2+";
+	msxstr[3] = " TurboR";
 	for(b=2;b>0;b--)
 	{
 		if (b==1)
@@ -48,11 +59,16 @@ void msxmem(void)
 		puts ( " \1Z\1W\1W\1[\1Z\1W\1W\1[\1Z\1W\1W\1[\1Z\1W\1W\1[    \1Z\1W\1W\1[\1Z\1W\1W\1[\1Z\1W\1W\1[\1Z\1W\1W\1[\r\n");
 	}
 		
-	slotput(0,0,0,"BA");
-
-	puts ( "32k ROM init ok\r\n");
-	puts ( "start main ::\r\n");
-
+	setInverse();
+	slotput(0,0,0,"BA", 1); // slot, subslot, page
+	gotoxy(1,21);
+	puts("MSX");
+	a = MSXVER;
+	puts(msxstr[a]);
+    //gotoxy (0,20);
+	//puts ( "32k ROM init ok\r\n");
+	//puts ( "start main ::\r\n");
+	gotoxy(0,22);
 	while (1) {
 		for (i = 0; i <38; i ++) {
 			bios_chput ('*');
@@ -80,22 +96,33 @@ void gotoxy(char x, char y)
 }
 const char posx[] = {3,  7, 11, 15,  3,  7, 11, 15, 23, 27, 31, 35, 23, 27, 31, 35};
 const char posy[] = {9,  7,  5,  3, 19, 17, 15, 13,  9,  7,  5,  3, 19, 17, 15, 13};
-void slotput(char a, char b, char c, char *s)
+void slotput(char a, char b, char c, char *s, char inv)
 {
-	char d = a * 4 + c;
-	char e = b * 4 + c;
+	char d = a * 4 + b;
+	char e = a * 4 + c;
 	gotoxy(posx[d], posy[e]);
-	puts(s);
+	if (inv==1)
+		putsi(s);
+	else
+		puts(s);
 }
 
 void bios_chput(char a) 
 { 
-	__asm	
-		ld ix,#2
+	__asm
+		push ix
+		ld ix,#4
 		add ix,sp
 		ld a,(ix)
 		call 0xa2 
+		pop ix
 	__endasm; 
+}
+
+void putsi(char *s)
+{
+	while(*s!=0)
+		bios_chput(*s++ + 128);	
 }
 	
 void puts(char *s)
@@ -156,6 +183,60 @@ void init_32krom (void) {
 	// primary SLOT change of the PAGE address
 	// (page2,0x8000-0xBFFF, PriSLOT 3 ==> PriSLOT 1 or 2 externalrom)
 	pageaddr (0x8000, slotnum);
+}
+
+char readVDP(int hl)
+{
+	__asm 
+		ld ix,#4
+		add ix,sp
+		ld l, (ix)
+		ld h, 1(ix)
+		call NRDVRM
+		ld l, a
+	__endasm;
+	return;
+}
+
+void writeVDP(int hl, char c)
+{
+	__asm
+		ld ix,#2
+		add ix,sp
+		ld l, (ix)
+		ld h, 1(ix)
+		ld a, 2(ix)
+		call NWRVRM
+	__endasm;
+}
+
+void setInverse(void)
+{
+	__asm
+		ld hl, #0x800
+		ld de, #0xc00
+		ld bc, #128*8
+	LOOP:
+		push de
+		push bc
+		call RDVRM
+		pop bc
+		pop de
+		cpl
+		ex de, hl
+		push de
+		push bc
+		call WRTVRM
+		pop bc
+		pop de
+		ex de, hl
+		inc hl
+		inc de
+		dec bc
+		ld a, b
+		or c
+		jr nz, LOOP 
+	__endasm;
 }
 
 void asm_ext(void)

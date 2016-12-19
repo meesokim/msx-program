@@ -36,17 +36,6 @@ $(TARGET2): $(OBJ)
 	$(CC) $^ $(LDFLAGS) -o $@.ihx
 	hex2bin -e rom -l $(SIZE2) $(TARGET2).ihx
 	
-msxmem:
-SRC1=
-SRC2=msxmem.c
-TARGET3=msxmem
-CODELOC=0x4000
-SIZE3=0x4000
-
-$(TARGET3): $(OBJ)
-	$(CC) $^ $(LDFLAGS) -o $@.ihx
-	hex2bin -e rom -l $(SIZE3) $(TARGET3).ihx	
-	
 callex:
 SRC1=psg.s basic.s
 SRC2=
@@ -56,13 +45,25 @@ SIZE4=0x4000
 
 $(TARGET4): $(OBJ)
 	$(CC) $^ $(LDFLAGS) -o $@.ihx
-	hex2bin -e rom -l $(SIZE4) $(TARGET4).ihx	
+	hex2bin -e rom -l $(SIZE4) $(TARGET4).ihx
+
+msxmem:
+SRC1=
+SRC2=msxmem.c
+TARGET3=msxmem
+CODELOC=0x4000
+SIZE3=0x4000
+
+$(TARGET3): $(OBJ)
+	$(CC) $^ $(LDFLAGS) -o $@.ihx
+	hex2bin -e rom -l $(SIZE3) $(TARGET3).ihx		
 
 
 all: 
 	make rom32k
 	make prueba
 	make callex
+	make msxmem
 
 clean:
 	rm -f *.rel *.lst *.rom *. *.map *.lk *.noi *.ihx *.sym *.asm *~

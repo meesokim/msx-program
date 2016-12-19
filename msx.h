@@ -108,6 +108,7 @@
 #define GETVC2 0x0153
 #define KILBUF 0x0156
 #define CALBAS 0x0159
+
 // MSX2
 #define SUBROM 0x015c
 #define EXTROM 0x015f
@@ -129,3 +130,17 @@
 #define PCMREC 0x0189
 
 #endif // __MSX
+
+volatile unsigned char * __at (0xFCC1) EXPTBL;
+volatile unsigned char * __at 0xFCC1 EXPTBL0;
+volatile unsigned char * __at 0xFCC2 EXPTBL1;
+volatile unsigned char * __at 0xFCC3 EXPTBL2;
+volatile unsigned char * __at 0xFCC4 EXPTBL3;
+volatile unsigned char * __at 0xFCC5 SLTTBL;
+volatile unsigned char * __at 0xFCC5 SLTTBL0;
+volatile unsigned char * __at 0xFCC6 SLTTBL1;
+volatile unsigned char * __at 0xFCC7 SLTTBL2;
+volatile unsigned char * __at 0xFCC8 SLTTBL3;
+volatile unsigned char * __at 0xFCC9 SLTATR;
+volatile unsigned char  __at 0x002d MSXVER;
+volatile unsigned char * __at 0xffff SUBSTSEL;
