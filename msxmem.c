@@ -250,6 +250,6 @@ void setInverse(void)
 void asm_ext(void)
 {	__asm
 	#include "msxdef.s"
-	#incbin "msxdef.s"
+//	#incbin "msxdef.s"
 	__endasm;
 }

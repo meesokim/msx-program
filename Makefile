@@ -1,5 +1,6 @@
 CC=sdcc
 AS=sdasz80
+hex2bin=makebin -s 65536
 
 OBJ1 = $(SRC1:.s=.rel)
 OBJ2 = $(SRC2:.c=.rel)
@@ -23,7 +24,7 @@ SIZE1=0x8000
 
 $(TARGET1): $(OBJ)
 	$(CC) $^ $(LDFLAGS) -o $@.ihx
-	hex2bin -e rom -l $(SIZE1) $(TARGET1).ihx
+	$(hex2bin) $(TARGET1).ihx $(TARGET1).rom 
 
 prueba:
 SRC1=
@@ -34,7 +35,7 @@ SIZE2=0x4000
 
 $(TARGET2): $(OBJ)
 	$(CC) $^ $(LDFLAGS) -o $@.ihx
-	hex2bin -e rom -l $(SIZE2) $(TARGET2).ihx
+	$(hex2bin) $(TARGET2).ihx $(TARGET2).rom
 	
 callex:
 SRC1=psg.s basic.s
@@ -45,7 +46,7 @@ SIZE4=0x4000
 
 $(TARGET4): $(OBJ)
 	$(CC) $^ $(LDFLAGS) -o $@.ihx
-	hex2bin -e rom -l $(SIZE4) $(TARGET4).ihx
+	$(hex2bin) $(TARGET4).ihx $(TARGET4).rom
 
 msxmem:
 SRC1=
@@ -53,11 +54,13 @@ SRC2=msxmem.c
 TARGET3=msxmem
 CODELOC=0x4000
 SIZE3=0x4000
+SKIP=16384
+ROMSIZE=16
 
 $(TARGET3): $(OBJ)
 	$(CC) $^ $(LDFLAGS) -o $@.ihx
-	hex2bin -e rom -l $(SIZE3) $(TARGET3).ihx		
-
+	$(hex2bin) $(TARGET3).ihx $(TARGET3).bin
+	dd skip=$(SKIP) count=`expr $(ROMSIZE) \* 1024` if=$(TARGET3).bin of=$(TARGET3).rom bs=1 status=none
 
 all: 
 	make rom32k
