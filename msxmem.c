@@ -16,7 +16,7 @@ void setInverse(void);
 
 //volatile unsigned char * __at (0xFCC1) EXPTBL;
 
-static char *msxstr[4];
+static char *msxstr[4] = {"1 ", "2 ", "2+", "TB"};
 
 void main(void)
 {
@@ -36,10 +36,6 @@ void msxmem(void)
 	unsigned char a, b;
 	a = 3;
 	b = 1;
-	msxstr[0] = "1 ";
-	msxstr[1] = "2 ";
-	msxstr[2] = "2+";
-	msxstr[3] = "TB";
 	for(b=2;b>0;b--)
 	{
 		if (b==1)
